@@ -12,14 +12,14 @@ tags:
 [CMU-Flea-Market](https://cmufleamarkets.com/)
 ===
 
-###This is a team project cooperate with Jiacheng Sun, Yuyang Fan and Shenglong Zhang. You could log in to the website at https://cmufleamarkets.com/.<br>
+### This is a team project cooperate with Jiacheng Sun, Yuyang Fan and Shenglong Zhang. You could log in to the website at https://cmufleamarkets.com/.<br>
 
 ## Overview
 The primary goal of this project is to construct a second hand item trading web application. 
 The entire application consists of several web pages which support user administration login, item posting and item displaying etc. 
 Other third party APIs such as Google Cloud API and PayPal API have been added to improve user experience and simplify trading process.
 
-###Log in and register page
+### Log in and register page
 Allow user locate their location, choose their preference category of product and other basic information.
 
 ### Main Page
@@ -41,5 +41,5 @@ his/her own user page.
 ### Purchase Page
 Allow user purchase with sandbox PayPal account.
 >Sandbox PayPal account used for purchase: <br>
->>Account: sb-hwive1317508@personal.example.com <br>
->>Password: odrr0#AI
+>Account: sb-hwive1317508@personal.example.com <br>
+>Password: odrr0#AI
