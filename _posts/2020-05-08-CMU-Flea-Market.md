@@ -4,7 +4,7 @@ title:      CMU-Flea-Market
 subtitle:   Team project in course Web Application
 date:       2020-05-08
 author:     BY
-header-img: img/post-bg-cook.jpg
+header-img: img/post-sample-image.jpg
 catalog: false
 tags:
     - Web Application
@@ -18,6 +18,7 @@ tags:
 The primary goal of this project is to construct a second hand item trading web application. 
 The entire application consists of several web pages which support user administration login, item posting and item displaying etc. 
 Other third party APIs such as Google Cloud API and PayPal API have been added to improve user experience and simplify trading process.
+The website is based on MySQL database and django framework, and it's deployed on google cloud engine.
 
 ### Log in and register page
 Allow user locate their location, choose their preference category of product and other basic information.
