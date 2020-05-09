@@ -12,7 +12,7 @@ tags:
 [CMU-Flea-Market](https://cmufleamarkets.com/)
 ===
 
-### This is a team project cooperate with Jiacheng Sun, Yuyang Fan and Shenglong Zhang. You could log in to the website at https://cmufleamarkets.com/.<br>
+### This is a team project cooperate with Jiacheng Sun, Yuyang Fan and Shenglong Zhang. You could log in to the website at [https://cmufleamarkets.com/](https://cmufleamarkets.com/).<br>
 
 ## Overview
 The primary goal of this project is to construct a second hand item trading web application. 
