@@ -3,7 +3,7 @@ layout:     post
 title:      CMU-Flea-Market
 subtitle:   Team project in course Web Application
 date:       2020-05-08
-author:     BY
+author:     Qian Cheng
 header-img: img/post-sample-image.jpg
 catalog: false
 tags:
