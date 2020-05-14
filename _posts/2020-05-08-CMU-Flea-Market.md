@@ -9,10 +9,10 @@ catalog: false
 tags:
     - Web Application
 ---
-[CMU-Flea-Market](https://cmufleamarkets.com/)
+[CMU-Flea-Market](http://35.236.251.161/)
 ===
 
->### This is a team project cooperate with Jiacheng Sun, Yuyang Fan and Shenglong Zhang. You could log in to the website at [https://cmufleamarkets.com/](https://cmufleamarkets.com/).<br>
+>### This is a team project cooperate with Jiacheng Sun, Yuyang Fan and Shenglong Zhang. You could log in to the website at [http://35.236.251.161/](http://35.236.251.161/).<br>
 
 ## Overview
 The primary goal of this project is to construct a second hand item trading web application. 
