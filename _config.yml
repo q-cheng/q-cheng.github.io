@@ -2,8 +2,8 @@
 title: Qian Cheng
 SEOTitle: Qian Cheng
 header-img: img/post-bg-desk.jpg
-email: qcheng@andrew.cmu.edu
-description: "I'm currently a master student study Electrical & Computer Engineering at Carnegie Mellon University."
+email: chengqian1999@gmail.com
+description: "Machine Learning Engineer building speech systems from model training to production."
 #keyword: "Web Application, Cloud Computing, Machine Learning, Computer System, Computer Vision"
 url: "http://q-cheng.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -11,7 +11,7 @@ github_repo: "https://github.com/q-cheng/q-cheng.github.io" # you code repositor
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "I'm currently a master student study Electrical & Computer Engineering at Carnegie Mellon University."
+sidebar-about-description: "Machine Learning Engineer. Speech, from model to production."
 #sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
