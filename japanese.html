@@ -12,16 +12,17 @@ permalink: /japanese/
 .jp-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#86868b;margin-bottom:8px}
 .jp-head h1{font-size:48px;line-height:1.06;margin:0 0 10px;font-weight:700;letter-spacing:-.035em}
 .jp-head p{margin:0;color:#6e6e73;font-size:18px;line-height:1.55}
-.jp-toolbar{display:flex;flex-wrap:nowrap;gap:10px;align-items:center;margin:0 0 18px;width:100%}
-.jp-toolbar .jp-search{flex:1 1 320px;min-width:180px}
-.jp-toolbar select{flex:0 1 150px;min-width:0}
-.jp-toolbar .jp-review{flex:0 0 auto}
+.jp-filter-frame{background:rgba(255,255,255,.78);border:1px solid #d2d2d7;border-radius:18px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 28px rgba(0,0,0,.035);margin-bottom:18px}
+.jp-toolbar{display:grid;grid-template-columns:minmax(260px,1.8fr) repeat(3,minmax(120px,.72fr)) auto;gap:8px;align-items:center;width:100%}
+.jp-toolbar .jp-search{min-width:0}
+.jp-toolbar select{min-width:0}
+.jp-toolbar .jp-review{min-width:max-content}
 .jp-control{height:44px;border:1px solid #d2d2d7;border-radius:12px;background:rgba(255,255,255,.92);color:#1d1d1f;padding:0 13px;font-size:14px;outline:none;box-shadow:0 1px 2px rgba(0,0,0,.03)}
 .jp-control:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.12)}
 .jp-review{height:44px;border:0;border-radius:12px;background:#1d1d1f;color:#fff;padding:0 17px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .jp-review:hover{background:#333336}
-.jp-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:26px;color:#86868b;font-size:13px}
-.jp-filter-pills{display:flex;gap:8px;flex-wrap:wrap}
+.jp-filter-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid #ececf0}
+.jp-meta{margin:0 0 26px;color:#86868b;font-size:13px}
 .jp-filter-pill{border:0;border-radius:999px;background:#e8e8ed;color:#515154;padding:7px 11px;font-size:12px;cursor:pointer}
 .jp-filter-pill.active{background:#1d1d1f;color:#fff}
 .jp-section{margin-top:32px}
@@ -36,24 +37,23 @@ permalink: /japanese/
 .jp-answer.hidden .jp-answer-inner{filter:blur(8px);user-select:none}
 .jp-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#86868b;margin:8px 0 4px}
 .jp-label:first-child{margin-top:0}
-.jp-corrected{font-size:17px;line-height:1.65}
-.jp-edit-ops{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
-.jp-edit-op{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:6px 9px;font-size:12px;line-height:1.2;font-weight:600}
-.jp-edit-op.add{background:#e8f7ee;color:#157347}
-.jp-edit-op.remove{background:#fdecec;color:#b42318}
-.jp-edit-op.replace{background:#eaf2ff;color:#175cd3}
-.jp-edit-op code{font:inherit;background:none;padding:0;color:inherit}
+.jp-corrected{font-size:17px;line-height:1.8}
+.jp-diff-equal{color:#1d1d1f}
+.jp-diff-add{background:#e8f7ee;color:#157347;border-radius:5px;padding:1px 2px}
+.jp-diff-remove{background:#fdecec;color:#b42318;border-radius:5px;padding:1px 2px;text-decoration:line-through;text-decoration-thickness:1.5px}
+.jp-diff-replace{background:#eaf2ff;color:#175cd3;border-radius:5px;padding:1px 2px}
+.jp-diff-old{color:#b42318;text-decoration:line-through;margin-right:3px;font-size:.88em}
+.jp-diff-arrow{color:#86868b;margin:0 2px;font-size:.82em}
 .jp-natural,.jp-why{font-size:15px;color:#515154;line-height:1.65}
 .jp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .jp-tag{display:inline-flex;align-items:center;border-radius:999px;background:#ececf1;color:#6e6e73;padding:5px 8px;font-size:11px;line-height:1}
 .jp-tag.lesson{background:#e8f1fb;color:#0066cc;font-weight:600}
 .jp-toggle{margin-top:12px;border:0;background:none;color:#0066cc;padding:0;cursor:pointer;font-size:13px;font-weight:500}
 .jp-empty{padding:44px 0;text-align:center;color:#86868b}
-@media(max-width:760px){
-  .jp-toolbar{flex-wrap:wrap}
-  .jp-toolbar .jp-search{flex:1 0 100%;min-width:100%}
-  .jp-toolbar select{flex:1 1 calc(50% - 5px)}
-  .jp-toolbar .jp-review{flex:1 0 100%}
+@media(max-width:900px){
+  .jp-toolbar{grid-template-columns:minmax(220px,1fr) repeat(2,minmax(120px,.7fr))}
+  .jp-toolbar .jp-search{grid-column:1/-1}
+  .jp-toolbar .jp-review{grid-column:3}
 }
 @media(max-width:640px){
   .jp-page{padding-top:78px}
@@ -61,8 +61,11 @@ permalink: /japanese/
   .jp-head{display:block}
   .jp-head h1{font-size:38px}
   .jp-head p{font-size:16px}
-  .jp-meta{display:block}
-  .jp-filter-pills{margin-top:10px}
+  .jp-toolbar{grid-template-columns:1fr 1fr}
+  .jp-toolbar .jp-search{grid-column:1/-1}
+  .jp-toolbar .jp-review{grid-column:1/-1}
+  .jp-filter-frame{padding:10px}
+  .jp-filter-pills{margin-top:9px}
   .jp-note-top{display:block}
   .jp-note-meta{margin-top:6px}
 }
@@ -78,18 +81,18 @@ permalink: /japanese/
       </div>
     </header>
 
-    <div class="jp-toolbar">
-      <input id="jp-search" class="jp-control jp-search" placeholder="Search notes" aria-label="Search notes">
-      <select id="jp-lesson" class="jp-control" aria-label="Filter by lesson"><option value="">All lessons</option></select>
-      <select id="jp-group" class="jp-control" aria-label="Filter by group"><option value="">All groups</option></select>
-      <select id="jp-tag" class="jp-control" aria-label="Filter by tag"><option value="">All tags</option></select>
-      <button id="jp-random" class="jp-review" type="button">Random review</button>
-    </div>
-
-    <div class="jp-meta">
-      <div id="jp-stats"></div>
+    <div class="jp-filter-frame">
+      <div class="jp-toolbar">
+        <input id="jp-search" class="jp-control jp-search" placeholder="Search notes" aria-label="Search notes">
+        <select id="jp-lesson" class="jp-control" aria-label="Filter by lesson"><option value="">All lessons</option></select>
+        <select id="jp-group" class="jp-control" aria-label="Filter by group"><option value="">All groups</option></select>
+        <select id="jp-tag" class="jp-control" aria-label="Filter by tag"><option value="">All tags</option></select>
+        <button id="jp-random" class="jp-review" type="button">Random review</button>
+      </div>
       <div id="jp-filter-pills" class="jp-filter-pills"></div>
     </div>
+
+    <div class="jp-meta"><div id="jp-stats"></div></div>
 
     <div id="jp-content"></div>
   </div>
@@ -186,7 +189,6 @@ permalink: /japanese/
     ops.reverse();
     const merged=[];
     for(const op of ops){
-      if(op.type==="equal") continue;
       const last=merged[merged.length-1];
       if(last&&last.type===op.type){
         last.old+=op.old; last.neu+=op.neu;
@@ -195,14 +197,13 @@ permalink: /japanese/
     return merged;
   }
 
-  function editOpsHtml(e){
-    const ops=editOps(e.original,e.corrected);
-    if(!ops.length) return '<div class="jp-edit-ops"><span class="jp-edit-op add">No edits</span></div>';
-    return '<div class="jp-edit-ops">'+ops.map(op=>{
-      if(op.type==="add") return '<span class="jp-edit-op add">Add <code>「'+esc(op.neu)+'」</code></span>';
-      if(op.type==="remove") return '<span class="jp-edit-op remove">Remove <code>「'+esc(op.old)+'」</code></span>';
-      return '<span class="jp-edit-op replace">Replace <code>「'+esc(op.old)+'」→「'+esc(op.neu)+'」</code></span>';
-    }).join("")+'</div>';
+  function inlineDiffHtml(e){
+    return editOps(e.original,e.corrected).map(op=>{
+      if(op.type==="equal") return '<span class="jp-diff-equal">'+esc(op.neu)+'</span>';
+      if(op.type==="add") return '<span class="jp-diff-add">'+esc(op.neu)+'</span>';
+      if(op.type==="remove") return '<span class="jp-diff-remove">'+esc(op.old)+'</span>';
+      return '<span class="jp-diff-replace"><span class="jp-diff-old">'+esc(op.old)+'</span><span class="jp-diff-arrow">→</span>'+esc(op.neu)+'</span>';
+    }).join("");
   }
 
   function note(e){
@@ -212,7 +213,7 @@ permalink: /japanese/
         '<div class="jp-note-meta">'+esc(e.date)+'</div>'+
       '</div>'+
       '<div class="jp-answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="jp-answer-inner">'+
-        '<div class="jp-label">Correction / note</div><div class="jp-corrected">'+esc(e.corrected)+'</div>'+editOpsHtml(e)+
+        '<div class="jp-label">Correction / note</div><div class="jp-corrected">'+inlineDiffHtml(e)+'</div>'+
         (e.natural?'<div class="jp-label">Natural alternative</div><div class="jp-natural">'+esc(e.natural)+'</div>':"")+
         '<div class="jp-label">Why</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>'+
       '</div></div>'+
