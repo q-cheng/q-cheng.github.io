@@ -207,16 +207,21 @@ permalink: /japanese/
   }
 
   function note(e){
+    const isGrammar=e.group==="Grammar notes";
+    const body=isGrammar
+      ? '<div class="jp-label">Meaning / usage</div><div class="jp-corrected">'+esc(e.corrected)+'</div>'+
+        (e.natural?'<div class="jp-label">Simpler form</div><div class="jp-natural">'+esc(e.natural)+'</div>':"")+
+        '<div class="jp-label">Explanation</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>'
+      : '<div class="jp-label">Correction / note</div><div class="jp-corrected">'+inlineDiffHtml(e)+'</div>'+
+        (e.natural?'<div class="jp-label">Natural alternative</div><div class="jp-natural">'+esc(e.natural)+'</div>':"")+
+        '<div class="jp-label">Why</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>';
+
     return '<article class="jp-note" data-id="'+esc(e.id)+'">'+
       '<div class="jp-note-top">'+
         '<div class="jp-original">'+esc(e.original)+'</div>'+
         '<div class="jp-note-meta">'+esc(e.date)+'</div>'+
       '</div>'+
-      '<div class="jp-answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="jp-answer-inner">'+
-        '<div class="jp-label">Correction / note</div><div class="jp-corrected">'+inlineDiffHtml(e)+'</div>'+
-        (e.natural?'<div class="jp-label">Natural alternative</div><div class="jp-natural">'+esc(e.natural)+'</div>':"")+
-        '<div class="jp-label">Why</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>'+
-      '</div></div>'+
+      '<div class="jp-answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="jp-answer-inner">'+body+'</div></div>'+
       '<div class="jp-tags"><span class="jp-tag lesson">Lesson '+esc(e.lesson||"—")+'</span>'+
       (e.tags||[]).map(t=>'<span class="jp-tag">'+esc(t)+'</span>').join("")+
       '</div>'+
