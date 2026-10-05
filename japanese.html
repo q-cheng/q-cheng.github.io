@@ -6,6 +6,17 @@ permalink: /japanese/
 
 <style>
 .jp-page{background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding:96px 0 72px}
+.jp-app[hidden],.jp-login[hidden]{display:none!important}
+.jp-login{min-height:58vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.jp-login-card{width:min(100%,420px);background:#fff;border:1px solid #d2d2d7;border-radius:22px;padding:30px;box-shadow:0 14px 45px rgba(0,0,0,.08);text-align:center}
+.jp-login-icon{width:54px;height:54px;border-radius:16px;background:#f5f5f7;display:grid;place-items:center;margin:0 auto 18px;font-size:25px}
+.jp-login-card h1{font-size:30px;line-height:1.15;margin:0 0 8px;letter-spacing:-.025em}
+.jp-login-card p{margin:0 0 22px;color:#6e6e73;font-size:15px;line-height:1.5}
+.jp-login-form{display:flex;gap:8px}
+.jp-login-input{flex:1;min-width:0;height:46px;box-sizing:border-box;border:1px solid #d2d2d7;border-radius:12px;padding:0 14px;font-size:15px;outline:none}
+.jp-login-input:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+.jp-login-button{height:46px;border:0;border-radius:12px;background:#1d1d1f;color:#fff;padding:0 18px;font-weight:600;cursor:pointer}
+.jp-login-error{min-height:20px;margin-top:10px;color:#b42318;font-size:13px;text-align:left}
 .jp-shell{max-width:1080px;margin:0 auto;padding:0 28px}
 .jp-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}
 .jp-title-wrap{max-width:720px}
@@ -63,6 +74,20 @@ permalink: /japanese/
 </style>
 
 <div class="jp-page">
+  <section id="jp-login" class="jp-login" aria-labelledby="jp-login-title">
+    <div class="jp-login-card">
+      <div class="jp-login-icon">🔒</div>
+      <h1 id="jp-login-title">Japanese Learning</h1>
+      <p>This section is private. Enter the password to continue.</p>
+      <form id="jp-login-form" class="jp-login-form">
+        <input id="jp-password" class="jp-login-input" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password">
+        <button class="jp-login-button" type="submit">Unlock</button>
+      </form>
+      <div id="jp-login-error" class="jp-login-error" role="alert" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <div id="jp-app" class="jp-app" hidden>
   <div class="jp-shell">
     <header class="jp-head">
       <div class="jp-title-wrap">
@@ -86,12 +111,24 @@ permalink: /japanese/
 
     <div id="jp-content"></div>
   </div>
+  </div>
 </div>
 
 <script>
 (function(){
   const state={data:null,hidden:new Set()};
+  const PASSWORD_HASH="7f4ba5383793d3f7b4c0c11817cd6670c0ebf96f66448d3f6967a2085aee5e75";
   const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+
+  async function sha256(value){
+    const bytes=new TextEncoder().encode(value);
+    const digest=await crypto.subtle.digest("SHA-256",bytes);
+    return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  }
+
+  async function unlock(password){
+    return (await sha256(password))===PASSWORD_HASH;
+  }
 
   async function init(){
     const res=await fetch("{{ site.baseurl }}/japanese-learning.json",{cache:"no-store"});
@@ -238,8 +275,34 @@ permalink: /japanese/
     requestAnimationFrame(()=>document.querySelector('[data-id="'+CSS.escape(e.id)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}));
   });
 
-  init().catch(()=>{
-    document.getElementById("jp-content").innerHTML='<div class="jp-empty">Could not load study data.</div>';
+  const login=document.getElementById("jp-login");
+  const app=document.getElementById("jp-app");
+  const form=document.getElementById("jp-login-form");
+  const input=document.getElementById("jp-password");
+  const error=document.getElementById("jp-login-error");
+
+  form.addEventListener("submit",async(e)=>{
+    e.preventDefault();
+    error.textContent="";
+    const button=form.querySelector("button");
+    button.disabled=true;
+    try{
+      if(await unlock(input.value)){
+        input.value="";
+        login.hidden=true;
+        app.hidden=false;
+        await init();
+      }else{
+        error.textContent="Incorrect password.";
+        input.select();
+      }
+    }catch(err){
+      error.textContent="Could not unlock this page.";
+    }finally{
+      button.disabled=false;
+    }
   });
+
+  requestAnimationFrame(()=>input.focus());
 })();
 </script>
