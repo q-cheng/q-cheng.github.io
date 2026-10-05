@@ -160,7 +160,65 @@
       "original": "若い子におけるポケカが暑いです。",
       "corrected": "若者におけるポケカの人気は高いです。",
       "natural": "若者の間で、ポケカは人気です。",
-      "explanation_zh": "「における」后面要接名词，所以用「ポケカの人気」。表示“很受欢迎”不能用「暑い」，应说「人気が高い」。这里「若者」也比「若い子」更适合正式表达。"
+      "explanation_zh": "「における＋名词」这个结构本身没有错，原句里的「ポケカ」也是名词。问题在于后面的「暑い」不能表达“很受欢迎”。为了表达“宝可梦卡牌在年轻人中的人气很高”，改成「若者におけるポケカの人気は高いです」更清楚。"
+    },
+    {
+      "id": "20261005-amount-uede",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "formal-expression",
+        "conjugation"
+      ],
+      "original": "＿＿＿＿金額を確認し＿＿＿＿た上で、お金を振り込んでください",
+      "corrected": "振込金額を確認した上で、お金を振り込んでください。",
+      "natural": "",
+      "explanation_zh": "这里目标语法是「Vた上で」。所以「確認し…た上で」要整理成「確認した上で」。“确认汇款金额之后，再进行汇款”。"
+    },
+    {
+      "id": "20261005-ready-uede",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "formal-expression"
+      ],
+      "original": "＿＿＿準備が整った＿＿＿上で、作業を始めてください",
+      "corrected": "準備が整った上で、作業を始めてください。",
+      "natural": "",
+      "explanation_zh": "「整う」的过去式是「整った」，直接接「上で」即可：准备就绪之后再开始作业。"
+    },
+    {
+      "id": "20261005-deck-uede",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "formal-expression"
+      ],
+      "original": "デッキを確認した上で、試合を始めてください。",
+      "corrected": "デッキを確認した上で、試合を始めてください。",
+      "natural": "デッキの内容を確認した上で、試合を始めてください。",
+      "explanation_zh": "这句语法正确。「〜た上で」表示先完成前项，再进行后项。若想更具体，可以说「デッキの内容を確認した上で」。"
+    },
+    {
+      "id": "20261005-materials-uede",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "conjugation",
+        "vocabulary"
+      ],
+      "original": "素材が揃えった上で、料理を始めてください。",
+      "corrected": "素材が揃った上で、料理を始めてください。",
+      "natural": "素材を揃えた上で、料理を始めてください。",
+      "explanation_zh": "「揃えった」是不正确的活用。如果主语是「素材が」，用自动词「揃う」→「揃った」。如果表达“把材料准备齐”，则用他动词「素材を揃えた上で」。"
     }
   ],
   "lessons": [
