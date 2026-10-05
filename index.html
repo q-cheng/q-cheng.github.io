@@ -1,105 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Japanese Learning — Qian Cheng</title>
-<meta name="description" content="A personal Japanese learning notebook with corrections, grammar notes, tags, and review tools.">
-<style>
-:root{color-scheme:light dark;--bg:#f7f7f8;--card:#fff;--text:#171717;--muted:#6b7280;--border:#e5e7eb;--accent:#3157d5;--accent-bg:#eef2ff}
-@media(prefers-color-scheme:dark){:root{--bg:#121212;--card:#1c1c1e;--text:#f5f5f5;--muted:#a1a1aa;--border:#33363b;--accent:#9fb2ff;--accent-bg:#202842}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-main{max-width:1040px;margin:auto;padding:28px 18px 64px}.hero{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:22px}
-h1{font-size:clamp(32px,6vw,56px);line-height:1;margin:0 0 8px}.subtitle{color:var(--muted);max-width:650px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-input,select,button{min-height:44px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font:inherit;padding:10px 12px}
-input{min-width:240px;flex:1}button{cursor:pointer}.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:12px 0 22px}
-.metric{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}.metric strong{display:block;font-size:24px}.metric span{color:var(--muted);font-size:13px}
-.tags{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 24px}.tag{border:1px solid var(--border);background:var(--card);padding:5px 9px;border-radius:999px;font-size:13px}
-.group{margin-top:28px}.group h2{font-size:21px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:0}.meta{color:var(--muted);font-size:13px}
-.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:12px}.jp{font-size:18px;word-break:break-word}.answer{border-top:1px solid var(--border);margin-top:12px;padding-top:2px}
-.answer.hidden .answer-content{filter:blur(7px);user-select:none}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.chips span{font-size:12px;background:var(--accent-bg);border-radius:999px;padding:3px 7px}
-.actions{display:flex;gap:8px;margin-top:12px}.empty{padding:30px;text-align:center;color:var(--muted)}
-footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:13px}
-a{color:var(--accent)}
-</style>
-</head>
-<body>
-<main>
-<section class="hero">
-  <div>
-    <h1>Japanese Learning</h1>
-    <div class="subtitle">My correction notebook. Original sentences stay visible, so I can review what I actually got wrong instead of only seeing polished Japanese.</div>
-  </div>
-  <button id="random" type="button">Random review</button>
-</section>
+---
+layout: page
+title: "Qian Cheng"
+description: "Personal site"
+header-img: "img/post-bg-unix-linux.jpg"
+---
 
-<div class="toolbar">
-  <input id="search" placeholder="Search Japanese or explanation…" aria-label="Search">
-  <select id="group" aria-label="Filter by group"><option value="">All groups</option></select>
-  <select id="tag" aria-label="Filter by tag"><option value="">All tags</option></select>
+<div class="post-container">
+  <h2>Welcome</h2>
+  <p>This is my personal site. You can find my GitHub, LinkedIn, resume, and other links in the sidebar.</p>
+
+  <hr>
+
+  <h2>Japanese Learning</h2>
+  <p>I keep a small study notebook for Japanese homework corrections, grammar notes, and recurring mistakes.</p>
+  <p>
+    <a class="btn btn-primary" href="{{ site.baseurl }}/japanese/">Open Japanese Learning</a>
+  </p>
 </div>
-
-<div id="summary" class="summary"></div>
-<div id="tag-cloud" class="tags"></div>
-<div id="content"></div>
-
-<footer>
-  Updated from my Japanese study notes. The detailed notebook is kept in Google Docs; this page is the review view.
-</footer>
-</main>
-<script>
-const state={data:null,hidden:new Set()};
-const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
-async function init(){
-  const res=await fetch("./japanese-learning.json",{cache:"no-store"});
-  state.data=await res.json();
-  const groups=[...new Set(state.data.entries.map(e=>e.group))].sort();
-  const tags=[...new Set(state.data.entries.flatMap(e=>e.tags||[]))].sort();
-  const groupSel=document.getElementById("group"),tagSel=document.getElementById("tag");
-  groups.forEach(g=>groupSel.insertAdjacentHTML("beforeend",'<option value="'+esc(g)+'">'+esc(g)+'</option>'));
-  tags.forEach(t=>tagSel.insertAdjacentHTML("beforeend",'<option value="'+esc(t)+'">'+esc(t)+'</option>'));
-  renderSummary(tags);
-  render();
-}
-function renderSummary(tags){
-  const entries=state.data.entries;
-  const counts={}; entries.forEach(e=>(e.tags||[]).forEach(t=>counts[t]=(counts[t]||0)+1));
-  document.getElementById("summary").innerHTML=[
-    ["Saved examples",entries.length],
-    ["Groups",new Set(entries.map(e=>e.group)).size],
-    ["Tags",tags.length],
-    ["Last updated",state.data.last_updated]
-  ].map(([label,value])=>'<div class="metric"><strong>'+esc(value)+'</strong><span>'+esc(label)+'</span></div>').join("");
-  document.getElementById("tag-cloud").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>'<button class="tag" type="button" data-tag="'+esc(t)+'">'+esc(t)+' · '+n+'</button>').join("");
-  document.querySelectorAll("[data-tag]").forEach(b=>b.addEventListener("click",()=>{document.getElementById("tag").value=b.dataset.tag;render()}));
-}
-function filtered(){
-  const q=document.getElementById("search").value.trim().toLowerCase();
-  const group=document.getElementById("group").value;
-  const tag=document.getElementById("tag").value;
-  return state.data.entries.filter(e=>(!group||e.group===group)&&(!tag||(e.tags||[]).includes(tag))&&(!q||[e.original,e.corrected,e.natural,e.explanation_zh,e.group,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q)));
-}
-function card(e){
-  return '<article class="card" data-id="'+esc(e.id)+'"><div class="meta">'+esc(e.date)+'</div><div class="label">Original</div><div class="jp">'+esc(e.original)+'</div><div class="answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="answer-content"><div class="label">Light correction / note</div><div class="jp">'+esc(e.corrected)+'</div>'+(e.natural?'<div class="label">Natural alternative</div><div>'+esc(e.natural)+'</div>':"")+'<div class="label">Why</div><div>'+esc(e.explanation_zh)+'</div></div></div><div class="chips">'+(e.tags||[]).map(t=>'<span>'+esc(t)+'</span>').join("")+'</div><div class="actions"><button type="button" class="toggle">'+(state.hidden.has(e.id)?"Show correction":"Hide correction")+'</button></div></article>';
-}
-function render(){
-  const rows=filtered(),root=document.getElementById("content");
-  if(!rows.length){root.innerHTML='<div class="empty">No matching notes.</div>';return}
-  const grouped={}; rows.forEach(e=>(grouped[e.group]??=[]).push(e));
-  root.innerHTML=Object.entries(grouped).map(([g,es])=>'<section class="group"><h2>'+esc(g)+'</h2><div class="grid">'+es.map(card).join("")+'</div></section>').join("");
-  root.querySelectorAll(".toggle").forEach(b=>b.addEventListener("click",()=>{const id=b.closest(".card").dataset.id;state.hidden.has(id)?state.hidden.delete(id):state.hidden.add(id);render()}));
-}
-document.getElementById("search").addEventListener("input",render);
-document.getElementById("group").addEventListener("change",render);
-document.getElementById("tag").addEventListener("change",render);
-document.getElementById("random").addEventListener("click",()=>{
-  const rows=filtered(); if(!rows.length)return;
-  const e=rows[Math.floor(Math.random()*rows.length)];
-  state.hidden.add(e.id); render();
-  requestAnimationFrame(()=>document.querySelector('[data-id="'+CSS.escape(e.id)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}));
-});
-init().catch(err=>{document.getElementById("content").innerHTML='<div class="empty">Could not load study data.</div>';console.error(err)});
-</script>
-</body>
-</html>
