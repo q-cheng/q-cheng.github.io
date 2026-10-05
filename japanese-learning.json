@@ -248,6 +248,34 @@
       "corrected": "彼女には、もう少しやさしくしてほしい。",
       "natural": "",
       "explanation_zh": "「やさしい」是い形容词，表示“希望她更温柔一点”时要变成「やさしくしてほしい」：やさしい → やさしくする → やさしくしてほしい。"
+    },
+    {
+      "id": "20261005-sasaki-tetsudatte-hoshii",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "naturalness"
+      ],
+      "original": "佐々木さん、このXの件を手伝ってほしいんだけど。",
+      "corrected": "佐々木さん、このXの件を手伝ってほしいんだけど。",
+      "natural": "",
+      "explanation_zh": "这句自然且正确。「〜てほしい」直接表达希望对方做某事。这里用平假名「ほしい」更常见。"
+    },
+    {
+      "id": "20261005-deck-temoraitai",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "naturalness"
+      ],
+      "original": "友達にデッキを確認してもらいたいです。",
+      "corrected": "友達にデッキを確認してもらいたいです。",
+      "natural": "",
+      "explanation_zh": "这句自然且正确。「〜てもらいたい」表示希望得到别人为自己做某事的帮助；这里是希望朋友帮自己确认卡组。"
     }
   ],
   "lessons": [
