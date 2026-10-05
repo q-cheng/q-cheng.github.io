@@ -1,54 +1,68 @@
 ---
-layout: page
+layout: default
 title: "Japanese Learning"
-description: "Homework corrections, grammar notes, and review"
-header-img: "img/post-bg-rwd.jpg"
 permalink: /japanese/
 ---
 
 <style>
-.jp-learning{font-size:16px;line-height:1.55}
-.jp-learning .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
-.jp-learning input,.jp-learning select,.jp-learning button{min-height:42px;border:1px solid #ddd;border-radius:8px;background:#fff;color:#333;padding:9px 11px}
-.jp-learning input{min-width:220px;flex:1}
-.jp-learning .summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:12px 0 20px}
-.jp-learning .metric{border:1px solid #e5e5e5;border-radius:10px;padding:12px;background:#fafafa}
-.jp-learning .metric strong{display:block;font-size:22px}
-.jp-learning .metric span{color:#777;font-size:12px}
-.jp-learning .tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 20px}
-.jp-learning .tag{border:1px solid #ddd;border-radius:999px;background:#fff;padding:4px 8px;font-size:12px}
-.jp-learning .group{margin-top:26px}
-.jp-learning .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
-.jp-learning .card{border:1px solid #e5e5e5;border-radius:12px;padding:15px;background:#fff}
-.jp-learning .meta{color:#888;font-size:12px}
-.jp-learning .label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-top:10px}
-.jp-learning .jp{font-size:18px;word-break:break-word}
-.jp-learning .answer{border-top:1px solid #eee;margin-top:10px;padding-top:2px}
-.jp-learning .answer.hidden .answer-content{filter:blur(7px);user-select:none}
-.jp-learning .chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}
-.jp-learning .chips span{font-size:11px;border-radius:999px;padding:3px 7px;background:#f0f3ff}
-.jp-learning .empty{padding:28px;text-align:center;color:#888}
-@media (prefers-color-scheme: dark){
-  .jp-learning input,.jp-learning select,.jp-learning button,.jp-learning .card,.jp-learning .metric,.jp-learning .tag{background:#1f1f1f;color:#eee;border-color:#444}
-  .jp-learning .metric,.jp-learning .card{background:#1a1a1a}
-  .jp-learning .answer{border-top-color:#444}
-  .jp-learning .chips span{background:#29304b}
+.jp-page{background:#f7f7f5;color:#222;min-height:100vh;padding:92px 0 64px}
+.jp-shell{max-width:960px;margin:0 auto;padding:0 22px}
+.jp-head{margin-bottom:28px}
+.jp-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a8a84;margin-bottom:8px}
+.jp-head h1{font-size:42px;line-height:1.1;margin:0 0 10px;font-weight:700}
+.jp-head p{margin:0;color:#6f6f69;max-width:650px}
+.jp-controls{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 14px}
+.jp-controls input,.jp-controls select,.jp-controls button{height:42px;border:1px solid #d9d9d4;border-radius:10px;background:#fff;color:#222;padding:0 12px;font-size:14px}
+.jp-controls input{flex:1;min-width:230px}
+.jp-controls button{cursor:pointer}
+.jp-tag-list{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 26px}
+.jp-tag-btn{appearance:none;border:0;background:#ecece7;color:#555;border-radius:999px;padding:6px 10px;font-size:12px;line-height:1.2;cursor:pointer}
+.jp-tag-btn.active{background:#333;color:#fff}
+.jp-stats{font-size:13px;color:#888;margin-bottom:20px}
+.jp-group{margin:34px 0}
+.jp-group-title{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #deded9;padding-bottom:9px;margin-bottom:4px}
+.jp-group-title h2{font-size:20px;margin:0}
+.jp-group-title span{font-size:12px;color:#999}
+.jp-row{padding:20px 0;border-bottom:1px solid #e3e3de}
+.jp-row-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+.jp-date{font-size:12px;color:#999;white-space:nowrap;padding-top:3px}
+.jp-original{font-size:18px;line-height:1.6;font-weight:500}
+.jp-answer{margin-top:14px;border-left:3px solid #b9c7a8;padding-left:14px}
+.jp-answer.hidden .jp-answer-inner{filter:blur(7px);user-select:none}
+.jp-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#999;margin:10px 0 4px}
+.jp-corrected{font-size:17px;line-height:1.6}
+.jp-natural,.jp-why{color:#555;line-height:1.65}
+.jp-row-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.jp-row-tags span{display:inline-block;font-size:11px;background:#efefe9;border-radius:999px;padding:4px 7px;color:#666;line-height:1.2}
+.jp-toggle{margin-top:12px;border:0;background:none;color:#4d6473;padding:0;cursor:pointer;font-size:13px}
+.jp-empty{padding:36px 0;color:#888;text-align:center}
+@media(max-width:640px){
+  .jp-page{padding-top:78px}
+  .jp-head h1{font-size:34px}
+  .jp-row-top{display:block}
+  .jp-date{margin-top:5px}
 }
 </style>
 
-<div class="jp-learning">
-  <p>I keep the original sentence visible so I can review what I actually got wrong, not only the polished version.</p>
+<div class="jp-page">
+  <div class="jp-shell">
+    <header class="jp-head">
+      <div class="jp-kicker">Study notebook</div>
+      <h1>Japanese Learning</h1>
+      <p>Corrections and grammar notes from my own Japanese study. I keep the original sentence beside the fix so the mistake stays memorable.</p>
+    </header>
 
-  <div class="toolbar">
-    <input id="jp-search" placeholder="Search Japanese or explanation…" aria-label="Search">
-    <select id="jp-group" aria-label="Filter by group"><option value="">All groups</option></select>
-    <select id="jp-tag" aria-label="Filter by tag"><option value="">All tags</option></select>
-    <button id="jp-random" type="button">Random review</button>
+    <div class="jp-controls">
+      <input id="jp-search" placeholder="Search notes…" aria-label="Search notes">
+      <select id="jp-group" aria-label="Filter by group"><option value="">All groups</option></select>
+      <select id="jp-tag" aria-label="Filter by tag"><option value="">All tags</option></select>
+      <button id="jp-random" type="button">Random review</button>
+    </div>
+
+    <div id="jp-tag-list" class="jp-tag-list"></div>
+    <div id="jp-stats" class="jp-stats"></div>
+    <div id="jp-content"></div>
   </div>
-
-  <div id="jp-summary" class="summary"></div>
-  <div id="jp-tag-cloud" class="tags"></div>
-  <div id="jp-content"></div>
 </div>
 
 <script>
@@ -61,55 +75,81 @@ permalink: /japanese/
     state.data=await res.json();
     const groups=[...new Set(state.data.entries.map(e=>e.group))].sort();
     const tags=[...new Set(state.data.entries.flatMap(e=>e.tags||[]))].sort();
-    const groupSel=document.getElementById("jp-group"),tagSel=document.getElementById("jp-tag");
+    const groupSel=document.getElementById("jp-group");
+    const tagSel=document.getElementById("jp-tag");
     groups.forEach(g=>groupSel.insertAdjacentHTML("beforeend",'<option value="'+esc(g)+'">'+esc(g)+'</option>'));
     tags.forEach(t=>tagSel.insertAdjacentHTML("beforeend",'<option value="'+esc(t)+'">'+esc(t)+'</option>'));
-    renderSummary(tags);
+    const counts={};
+    state.data.entries.forEach(e=>(e.tags||[]).forEach(t=>counts[t]=(counts[t]||0)+1));
+    document.getElementById("jp-tag-list").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>'<button class="jp-tag-btn" type="button" data-tag="'+esc(t)+'">'+esc(t)+' · '+n+'</button>').join("");
+    document.querySelectorAll(".jp-tag-btn").forEach(b=>b.addEventListener("click",()=>{
+      tagSel.value=tagSel.value===b.dataset.tag?"":b.dataset.tag;
+      render();
+      updateTagState();
+    }));
     render();
+    updateTagState();
   }
 
-  function renderSummary(tags){
-    const entries=state.data.entries;
-    const counts={}; entries.forEach(e=>(e.tags||[]).forEach(t=>counts[t]=(counts[t]||0)+1));
-    document.getElementById("jp-summary").innerHTML=[
-      ["Saved examples",entries.length],
-      ["Groups",new Set(entries.map(e=>e.group)).size],
-      ["Tags",tags.length],
-      ["Last updated",state.data.last_updated]
-    ].map(([label,value])=>'<div class="metric"><strong>'+esc(value)+'</strong><span>'+esc(label)+'</span></div>').join("");
-    document.getElementById("jp-tag-cloud").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>'<button class="tag" type="button" data-jp-tag="'+esc(t)+'">'+esc(t)+' · '+n+'</button>').join("");
-    document.querySelectorAll("[data-jp-tag]").forEach(b=>b.addEventListener("click",()=>{document.getElementById("jp-tag").value=b.dataset.jpTag;render()}));
+  function updateTagState(){
+    const current=document.getElementById("jp-tag").value;
+    document.querySelectorAll(".jp-tag-btn").forEach(b=>b.classList.toggle("active",b.dataset.tag===current));
   }
 
   function filtered(){
     const q=document.getElementById("jp-search").value.trim().toLowerCase();
     const group=document.getElementById("jp-group").value;
     const tag=document.getElementById("jp-tag").value;
-    return state.data.entries.filter(e=>(!group||e.group===group)&&(!tag||(e.tags||[]).includes(tag))&&(!q||[e.original,e.corrected,e.natural,e.explanation_zh,e.group,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q)));
+    return state.data.entries.filter(e=>
+      (!group||e.group===group)&&
+      (!tag||(e.tags||[]).includes(tag))&&
+      (!q||[e.original,e.corrected,e.natural,e.explanation_zh,e.group,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q))
+    );
   }
 
-  function card(e){
-    return '<article class="card" data-id="'+esc(e.id)+'"><div class="meta">'+esc(e.date)+'</div><div class="label">Original</div><div class="jp">'+esc(e.original)+'</div><div class="answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="answer-content"><div class="label">Light correction / note</div><div class="jp">'+esc(e.corrected)+'</div>'+(e.natural?'<div class="label">Natural alternative</div><div>'+esc(e.natural)+'</div>':"")+'<div class="label">Why</div><div>'+esc(e.explanation_zh)+'</div></div></div><div class="chips">'+(e.tags||[]).map(t=>'<span>'+esc(t)+'</span>').join("")+'</div><button type="button" class="jp-toggle" style="margin-top:10px">'+(state.hidden.has(e.id)?"Show correction":"Hide correction")+'</button></article>';
+  function row(e){
+    return '<article class="jp-row" data-id="'+esc(e.id)+'">'+
+      '<div class="jp-row-top"><div class="jp-original">'+esc(e.original)+'</div><div class="jp-date">'+esc(e.date)+'</div></div>'+
+      '<div class="jp-answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="jp-answer-inner">'+
+        '<div class="jp-label">Correction / note</div><div class="jp-corrected">'+esc(e.corrected)+'</div>'+
+        (e.natural?'<div class="jp-label">Natural alternative</div><div class="jp-natural">'+esc(e.natural)+'</div>':"")+
+        '<div class="jp-label">Why</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>'+
+      '</div></div>'+
+      '<div class="jp-row-tags">'+(e.tags||[]).map(t=>'<span>'+esc(t)+'</span>').join("")+'</div>'+
+      '<button class="jp-toggle" type="button">'+(state.hidden.has(e.id)?"Show answer":"Hide answer")+'</button>'+
+    '</article>';
   }
 
   function render(){
-    const rows=filtered(),root=document.getElementById("jp-content");
-    if(!rows.length){root.innerHTML='<div class="empty">No matching notes.</div>';return}
-    const grouped={}; rows.forEach(e=>(grouped[e.group]??=[]).push(e));
-    root.innerHTML=Object.entries(grouped).map(([g,es])=>'<section class="group"><h2>'+esc(g)+'</h2><div class="grid">'+es.map(card).join("")+'</div></section>').join("");
-    root.querySelectorAll(".jp-toggle").forEach(b=>b.addEventListener("click",()=>{const id=b.closest(".card").dataset.id;state.hidden.has(id)?state.hidden.delete(id):state.hidden.add(id);render()}));
+    const rows=filtered();
+    const root=document.getElementById("jp-content");
+    document.getElementById("jp-stats").textContent=rows.length+" of "+state.data.entries.length+" notes · updated "+state.data.last_updated;
+    if(!rows.length){root.innerHTML='<div class="jp-empty">No matching notes.</div>';return}
+    const grouped={};
+    rows.forEach(e=>(grouped[e.group]??=[]).push(e));
+    root.innerHTML=Object.entries(grouped).map(([g,es])=>
+      '<section class="jp-group"><div class="jp-group-title"><h2>'+esc(g)+'</h2><span>'+es.length+' notes</span></div>'+es.map(row).join("")+'</section>'
+    ).join("");
+    root.querySelectorAll(".jp-toggle").forEach(b=>b.addEventListener("click",()=>{
+      const id=b.closest(".jp-row").dataset.id;
+      state.hidden.has(id)?state.hidden.delete(id):state.hidden.add(id);
+      render();
+      updateTagState();
+    }));
   }
 
   document.getElementById("jp-search").addEventListener("input",render);
   document.getElementById("jp-group").addEventListener("change",render);
-  document.getElementById("jp-tag").addEventListener("change",render);
+  document.getElementById("jp-tag").addEventListener("change",()=>{render();updateTagState()});
   document.getElementById("jp-random").addEventListener("click",()=>{
     const rows=filtered(); if(!rows.length)return;
     const e=rows[Math.floor(Math.random()*rows.length)];
-    state.hidden.add(e.id); render();
+    state.hidden.add(e.id);
+    render();
+    updateTagState();
     requestAnimationFrame(()=>document.querySelector('[data-id="'+CSS.escape(e.id)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}));
   });
 
-  init().catch(()=>{document.getElementById("jp-content").innerHTML='<div class="empty">Could not load study data.</div>'});
+  init().catch(()=>{document.getElementById("jp-content").innerHTML='<div class="jp-empty">Could not load study data.</div>'});
 })();
 </script>
