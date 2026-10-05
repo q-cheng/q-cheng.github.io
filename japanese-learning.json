@@ -129,6 +129,38 @@
       "natural": "海外での日本のアニメの評価は年々高まっている。",
       "explanation_zh": "记忆方式：「Aにおいて + 句子」；「Aにおける + 名词」。",
       "lesson": "261006"
+    },
+    {
+      "id": "20261005-pacifico-pokeca",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "particle",
+        "formal-expression",
+        "naturalness"
+      ],
+      "original": "パシフィコ横浜において、ポケカ大会が開催される。",
+      "corrected": "パシフィコ横浜において、ポケカの大会が開催される。",
+      "natural": "パシフィコ横浜で、ポケカの大会が開催される。",
+      "explanation_zh": "「において」的用法本身正确。这里把「ポケカ大会」改成「ポケカの大会」更自然；口语中也可以直接用「で」。"
+    },
+    {
+      "id": "20261005-young-pokeca",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "vocabulary",
+        "formal-expression",
+        "naturalness"
+      ],
+      "original": "若い子におけるポケカが暑いです。",
+      "corrected": "若者におけるポケカの人気は高いです。",
+      "natural": "若者の間で、ポケカは人気です。",
+      "explanation_zh": "「における」后面要接名词，所以用「ポケカの人気」。表示“很受欢迎”不能用「暑い」，应说「人気が高い」。这里「若者」也比「若い子」更适合正式表达。"
     }
   ],
   "lessons": [
