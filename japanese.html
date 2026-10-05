@@ -12,19 +12,16 @@ permalink: /japanese/
 .jp-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#86868b;margin-bottom:8px}
 .jp-head h1{font-size:48px;line-height:1.06;margin:0 0 10px;font-weight:700;letter-spacing:-.035em}
 .jp-head p{margin:0;color:#6e6e73;font-size:18px;line-height:1.55}
-.jp-filter-frame{background:rgba(255,255,255,.78);border:1px solid #d2d2d7;border-radius:18px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 28px rgba(0,0,0,.035);margin-bottom:18px}
-.jp-toolbar{display:grid;grid-template-columns:minmax(260px,1.8fr) repeat(3,minmax(120px,.72fr)) auto;gap:8px;align-items:center;width:100%}
-.jp-toolbar .jp-search{min-width:0}
-.jp-toolbar select{min-width:0}
-.jp-toolbar .jp-review{min-width:max-content}
-.jp-control{height:44px;border:1px solid #d2d2d7;border-radius:12px;background:rgba(255,255,255,.92);color:#1d1d1f;padding:0 13px;font-size:14px;outline:none;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.jp-filter-frame{background:rgba(255,255,255,.78);border:1px solid #d2d2d7;border-radius:18px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 28px rgba(0,0,0,.035);margin-bottom:18px;overflow-x:auto}
+.jp-toolbar{display:flex;flex-wrap:nowrap;gap:8px;align-items:stretch;width:max-content;min-width:100%}
+.jp-toolbar .jp-search{flex:1 1 340px;min-width:280px}
+.jp-toolbar select{flex:0 0 145px;min-width:145px}
+.jp-toolbar .jp-review{flex:0 0 auto}
+.jp-control{display:block;box-sizing:border-box;height:44px!important;margin:0!important;border:1px solid #d2d2d7;border-radius:12px;background:rgba(255,255,255,.92);color:#1d1d1f;padding:0 13px!important;font-size:14px;line-height:44px;outline:none;box-shadow:0 1px 2px rgba(0,0,0,.03);vertical-align:top}
 .jp-control:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.12)}
 .jp-review{height:44px;border:0;border-radius:12px;background:#1d1d1f;color:#fff;padding:0 17px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
 .jp-review:hover{background:#333336}
-.jp-filter-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid #ececf0}
 .jp-meta{margin:0 0 26px;color:#86868b;font-size:13px}
-.jp-filter-pill{border:0;border-radius:999px;background:#e8e8ed;color:#515154;padding:7px 11px;font-size:12px;cursor:pointer}
-.jp-filter-pill.active{background:#1d1d1f;color:#fff}
 .jp-section{margin-top:32px}
 .jp-section-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid #d2d2d7}
 .jp-section-head h2{margin:0;font-size:22px;letter-spacing:-.015em}
@@ -50,11 +47,6 @@ permalink: /japanese/
 .jp-tag.lesson{background:#e8f1fb;color:#0066cc;font-weight:600}
 .jp-toggle{margin-top:12px;border:0;background:none;color:#0066cc;padding:0;cursor:pointer;font-size:13px;font-weight:500}
 .jp-empty{padding:44px 0;text-align:center;color:#86868b}
-@media(max-width:900px){
-  .jp-toolbar{grid-template-columns:minmax(220px,1fr) repeat(2,minmax(120px,.7fr))}
-  .jp-toolbar .jp-search{grid-column:1/-1}
-  .jp-toolbar .jp-review{grid-column:3}
-}
 @media(max-width:640px){
   .jp-page{padding-top:78px}
   .jp-shell{padding:0 18px}
@@ -65,8 +57,7 @@ permalink: /japanese/
   .jp-toolbar .jp-search{grid-column:1/-1}
   .jp-toolbar .jp-review{grid-column:1/-1}
   .jp-filter-frame{padding:10px}
-  .jp-filter-pills{margin-top:9px}
-  .jp-note-top{display:block}
+    .jp-note-top{display:block}
   .jp-note-meta{margin-top:6px}
 }
 </style>
@@ -89,7 +80,6 @@ permalink: /japanese/
         <select id="jp-tag" class="jp-control" aria-label="Filter by tag"><option value="">All tags</option></select>
         <button id="jp-random" class="jp-review" type="button">Random review</button>
       </div>
-      <div id="jp-filter-pills" class="jp-filter-pills"></div>
     </div>
 
     <div class="jp-meta"><div id="jp-stats"></div></div>
@@ -119,26 +109,7 @@ permalink: /japanese/
     groups.forEach(v=>groupSel.insertAdjacentHTML("beforeend",'<option value="'+esc(v)+'">'+esc(v)+'</option>'));
     tags.forEach(v=>tagSel.insertAdjacentHTML("beforeend",'<option value="'+esc(v)+'">'+esc(v)+'</option>'));
 
-    const counts={};
-    state.data.entries.forEach(e=>(e.tags||[]).forEach(t=>counts[t]=(counts[t]||0)+1));
-    document.getElementById("jp-filter-pills").innerHTML=
-      Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>
-        '<button class="jp-filter-pill" type="button" data-tag="'+esc(t)+'">'+esc(t)+' · '+n+'</button>'
-      ).join("");
-
-    document.querySelectorAll(".jp-filter-pill").forEach(b=>b.addEventListener("click",()=>{
-      tagSel.value=tagSel.value===b.dataset.tag?"":b.dataset.tag;
-      render();
-      updatePills();
-    }));
-
     render();
-    updatePills();
-  }
-
-  function updatePills(){
-    const current=document.getElementById("jp-tag").value;
-    document.querySelectorAll(".jp-filter-pill").forEach(b=>b.classList.toggle("active",b.dataset.tag===current));
   }
 
   function filtered(){
@@ -250,14 +221,13 @@ permalink: /japanese/
       const id=b.closest(".jp-note").dataset.id;
       state.hidden.has(id)?state.hidden.delete(id):state.hidden.add(id);
       render();
-      updatePills();
     }));
   }
 
   document.getElementById("jp-search").addEventListener("input",render);
   document.getElementById("jp-lesson").addEventListener("change",render);
   document.getElementById("jp-group").addEventListener("change",render);
-  document.getElementById("jp-tag").addEventListener("change",()=>{render();updatePills()});
+  document.getElementById("jp-tag").addEventListener("change",()=>{render()});
 
   document.getElementById("jp-random").addEventListener("click",()=>{
     const rows=filtered();
@@ -265,7 +235,6 @@ permalink: /japanese/
     const e=rows[Math.floor(Math.random()*rows.length)];
     state.hidden.add(e.id);
     render();
-    updatePills();
     requestAnimationFrame(()=>document.querySelector('[data-id="'+CSS.escape(e.id)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}));
   });
 
