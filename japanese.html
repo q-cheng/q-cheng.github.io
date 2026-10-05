@@ -5,62 +5,85 @@ permalink: /japanese/
 ---
 
 <style>
-.jp-page{background:#f7f7f5;color:#222;min-height:100vh;padding:92px 0 64px}
-.jp-shell{max-width:960px;margin:0 auto;padding:0 22px}
-.jp-head{margin-bottom:28px}
-.jp-kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a8a84;margin-bottom:8px}
-.jp-head h1{font-size:42px;line-height:1.1;margin:0 0 10px;font-weight:700}
-.jp-head p{margin:0;color:#6f6f69;max-width:650px}
-.jp-controls{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 14px}
-.jp-controls input,.jp-controls select,.jp-controls button{height:42px;border:1px solid #d9d9d4;border-radius:10px;background:#fff;color:#222;padding:0 12px;font-size:14px}
-.jp-controls input{flex:1;min-width:230px}
-.jp-controls button{cursor:pointer}
-.jp-tag-list{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 26px}
-.jp-tag-btn{appearance:none;border:0;background:#ecece7;color:#555;border-radius:999px;padding:6px 10px;font-size:12px;line-height:1.2;cursor:pointer}
-.jp-tag-btn.active{background:#333;color:#fff}
-.jp-stats{font-size:13px;color:#888;margin-bottom:20px}
-.jp-group{margin:34px 0}
-.jp-group-title{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #deded9;padding-bottom:9px;margin-bottom:4px}
-.jp-group-title h2{font-size:20px;margin:0}
-.jp-group-title span{font-size:12px;color:#999}
-.jp-row{padding:20px 0;border-bottom:1px solid #e3e3de}
-.jp-row-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-.jp-date{font-size:12px;color:#999;white-space:nowrap;padding-top:3px}
-.jp-original{font-size:18px;line-height:1.6;font-weight:500}
-.jp-answer{margin-top:14px;border-left:3px solid #b9c7a8;padding-left:14px}
-.jp-answer.hidden .jp-answer-inner{filter:blur(7px);user-select:none}
-.jp-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#999;margin:10px 0 4px}
-.jp-corrected{font-size:17px;line-height:1.6}
-.jp-natural,.jp-why{color:#555;line-height:1.65}
-.jp-row-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-.jp-row-tags span{display:inline-block;font-size:11px;background:#efefe9;border-radius:999px;padding:4px 7px;color:#666;line-height:1.2}
-.jp-toggle{margin-top:12px;border:0;background:none;color:#4d6473;padding:0;cursor:pointer;font-size:13px}
-.jp-empty{padding:36px 0;color:#888;text-align:center}
+.jp-page{background:#f5f5f7;color:#1d1d1f;min-height:100vh;padding:96px 0 72px}
+.jp-shell{max-width:1080px;margin:0 auto;padding:0 28px}
+.jp-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:30px}
+.jp-title-wrap{max-width:720px}
+.jp-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#86868b;margin-bottom:8px}
+.jp-head h1{font-size:48px;line-height:1.06;margin:0 0 10px;font-weight:700;letter-spacing:-.035em}
+.jp-head p{margin:0;color:#6e6e73;font-size:18px;line-height:1.55}
+.jp-toolbar{display:grid;grid-template-columns:minmax(260px,1.8fr) repeat(3,minmax(130px,.7fr)) auto;gap:10px;align-items:center;margin:0 0 18px}
+.jp-control{height:44px;border:1px solid #d2d2d7;border-radius:12px;background:rgba(255,255,255,.92);color:#1d1d1f;padding:0 13px;font-size:14px;outline:none;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.jp-control:focus{border-color:#0071e3;box-shadow:0 0 0 3px rgba(0,113,227,.12)}
+.jp-review{height:44px;border:0;border-radius:12px;background:#1d1d1f;color:#fff;padding:0 17px;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.jp-review:hover{background:#333336}
+.jp-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:26px;color:#86868b;font-size:13px}
+.jp-filter-pills{display:flex;gap:8px;flex-wrap:wrap}
+.jp-filter-pill{border:0;border-radius:999px;background:#e8e8ed;color:#515154;padding:7px 11px;font-size:12px;cursor:pointer}
+.jp-filter-pill.active{background:#1d1d1f;color:#fff}
+.jp-section{margin-top:32px}
+.jp-section-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:10px;border-bottom:1px solid #d2d2d7}
+.jp-section-head h2{margin:0;font-size:22px;letter-spacing:-.015em}
+.jp-section-head span{font-size:12px;color:#86868b}
+.jp-note{padding:22px 0;border-bottom:1px solid #e1e1e6}
+.jp-note-top{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
+.jp-original{font-size:19px;line-height:1.7;font-weight:600;letter-spacing:-.01em}
+.jp-note-meta{font-size:12px;color:#86868b;white-space:nowrap;padding-top:4px}
+.jp-answer{margin-top:15px;padding:15px 17px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.03),0 6px 18px rgba(0,0,0,.035)}
+.jp-answer.hidden .jp-answer-inner{filter:blur(8px);user-select:none}
+.jp-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#86868b;margin:8px 0 4px}
+.jp-label:first-child{margin-top:0}
+.jp-corrected{font-size:17px;line-height:1.65}
+.jp-natural,.jp-why{font-size:15px;color:#515154;line-height:1.65}
+.jp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.jp-tag{display:inline-flex;align-items:center;border-radius:999px;background:#ececf1;color:#6e6e73;padding:5px 8px;font-size:11px;line-height:1}
+.jp-tag.lesson{background:#e8f1fb;color:#0066cc;font-weight:600}
+.jp-toggle{margin-top:12px;border:0;background:none;color:#0066cc;padding:0;cursor:pointer;font-size:13px;font-weight:500}
+.jp-empty{padding:44px 0;text-align:center;color:#86868b}
+@media(max-width:900px){
+  .jp-toolbar{grid-template-columns:1fr 1fr 1fr}
+  .jp-toolbar .jp-search{grid-column:1/-1}
+  .jp-review{grid-column:3}
+}
 @media(max-width:640px){
   .jp-page{padding-top:78px}
-  .jp-head h1{font-size:34px}
-  .jp-row-top{display:block}
-  .jp-date{margin-top:5px}
+  .jp-shell{padding:0 18px}
+  .jp-head{display:block}
+  .jp-head h1{font-size:38px}
+  .jp-head p{font-size:16px}
+  .jp-toolbar{grid-template-columns:1fr 1fr}
+  .jp-toolbar .jp-search{grid-column:1/-1}
+  .jp-review{grid-column:1/-1}
+  .jp-meta{display:block}
+  .jp-filter-pills{margin-top:10px}
+  .jp-note-top{display:block}
+  .jp-note-meta{margin-top:6px}
 }
 </style>
 
 <div class="jp-page">
   <div class="jp-shell">
     <header class="jp-head">
-      <div class="jp-kicker">Study notebook</div>
-      <h1>Japanese Learning</h1>
-      <p>Corrections and grammar notes from my own Japanese study. I keep the original sentence beside the fix so the mistake stays memorable.</p>
+      <div class="jp-title-wrap">
+        <div class="jp-eyebrow">Study notebook</div>
+        <h1>Japanese Learning</h1>
+        <p>Corrections and grammar notes from my own study, organized by lesson and mistake type.</p>
+      </div>
     </header>
 
-    <div class="jp-controls">
-      <input id="jp-search" placeholder="Search notes…" aria-label="Search notes">
-      <select id="jp-group" aria-label="Filter by group"><option value="">All groups</option></select>
-      <select id="jp-tag" aria-label="Filter by tag"><option value="">All tags</option></select>
-      <button id="jp-random" type="button">Random review</button>
+    <div class="jp-toolbar">
+      <input id="jp-search" class="jp-control jp-search" placeholder="Search notes" aria-label="Search notes">
+      <select id="jp-lesson" class="jp-control" aria-label="Filter by lesson"><option value="">All lessons</option></select>
+      <select id="jp-group" class="jp-control" aria-label="Filter by group"><option value="">All groups</option></select>
+      <select id="jp-tag" class="jp-control" aria-label="Filter by tag"><option value="">All tags</option></select>
+      <button id="jp-random" class="jp-review" type="button">Random review</button>
     </div>
 
-    <div id="jp-tag-list" class="jp-tag-list"></div>
-    <div id="jp-stats" class="jp-stats"></div>
+    <div class="jp-meta">
+      <div id="jp-stats"></div>
+      <div id="jp-filter-pills" class="jp-filter-pills"></div>
+    </div>
+
     <div id="jp-content"></div>
   </div>
 </div>
@@ -73,49 +96,69 @@ permalink: /japanese/
   async function init(){
     const res=await fetch("{{ site.baseurl }}/japanese-learning.json",{cache:"no-store"});
     state.data=await res.json();
+
+    const lessons=[...new Set(state.data.entries.map(e=>e.lesson).filter(Boolean))].sort().reverse();
     const groups=[...new Set(state.data.entries.map(e=>e.group))].sort();
     const tags=[...new Set(state.data.entries.flatMap(e=>e.tags||[]))].sort();
+
+    const lessonSel=document.getElementById("jp-lesson");
     const groupSel=document.getElementById("jp-group");
     const tagSel=document.getElementById("jp-tag");
-    groups.forEach(g=>groupSel.insertAdjacentHTML("beforeend",'<option value="'+esc(g)+'">'+esc(g)+'</option>'));
-    tags.forEach(t=>tagSel.insertAdjacentHTML("beforeend",'<option value="'+esc(t)+'">'+esc(t)+'</option>'));
+
+    lessons.forEach(v=>lessonSel.insertAdjacentHTML("beforeend",'<option value="'+esc(v)+'">Lesson '+esc(v)+'</option>'));
+    groups.forEach(v=>groupSel.insertAdjacentHTML("beforeend",'<option value="'+esc(v)+'">'+esc(v)+'</option>'));
+    tags.forEach(v=>tagSel.insertAdjacentHTML("beforeend",'<option value="'+esc(v)+'">'+esc(v)+'</option>'));
+
     const counts={};
     state.data.entries.forEach(e=>(e.tags||[]).forEach(t=>counts[t]=(counts[t]||0)+1));
-    document.getElementById("jp-tag-list").innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>'<button class="jp-tag-btn" type="button" data-tag="'+esc(t)+'">'+esc(t)+' · '+n+'</button>').join("");
-    document.querySelectorAll(".jp-tag-btn").forEach(b=>b.addEventListener("click",()=>{
+    document.getElementById("jp-filter-pills").innerHTML=
+      Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([t,n])=>
+        '<button class="jp-filter-pill" type="button" data-tag="'+esc(t)+'">'+esc(t)+' · '+n+'</button>'
+      ).join("");
+
+    document.querySelectorAll(".jp-filter-pill").forEach(b=>b.addEventListener("click",()=>{
       tagSel.value=tagSel.value===b.dataset.tag?"":b.dataset.tag;
       render();
-      updateTagState();
+      updatePills();
     }));
+
     render();
-    updateTagState();
+    updatePills();
   }
 
-  function updateTagState(){
+  function updatePills(){
     const current=document.getElementById("jp-tag").value;
-    document.querySelectorAll(".jp-tag-btn").forEach(b=>b.classList.toggle("active",b.dataset.tag===current));
+    document.querySelectorAll(".jp-filter-pill").forEach(b=>b.classList.toggle("active",b.dataset.tag===current));
   }
 
   function filtered(){
     const q=document.getElementById("jp-search").value.trim().toLowerCase();
+    const lesson=document.getElementById("jp-lesson").value;
     const group=document.getElementById("jp-group").value;
     const tag=document.getElementById("jp-tag").value;
+
     return state.data.entries.filter(e=>
+      (!lesson||e.lesson===lesson)&&
       (!group||e.group===group)&&
       (!tag||(e.tags||[]).includes(tag))&&
-      (!q||[e.original,e.corrected,e.natural,e.explanation_zh,e.group,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q))
+      (!q||[e.original,e.corrected,e.natural,e.explanation_zh,e.group,e.lesson,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q))
     );
   }
 
-  function row(e){
-    return '<article class="jp-row" data-id="'+esc(e.id)+'">'+
-      '<div class="jp-row-top"><div class="jp-original">'+esc(e.original)+'</div><div class="jp-date">'+esc(e.date)+'</div></div>'+
+  function note(e){
+    return '<article class="jp-note" data-id="'+esc(e.id)+'">'+
+      '<div class="jp-note-top">'+
+        '<div class="jp-original">'+esc(e.original)+'</div>'+
+        '<div class="jp-note-meta">'+esc(e.date)+'</div>'+
+      '</div>'+
       '<div class="jp-answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="jp-answer-inner">'+
         '<div class="jp-label">Correction / note</div><div class="jp-corrected">'+esc(e.corrected)+'</div>'+
         (e.natural?'<div class="jp-label">Natural alternative</div><div class="jp-natural">'+esc(e.natural)+'</div>':"")+
         '<div class="jp-label">Why</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>'+
       '</div></div>'+
-      '<div class="jp-row-tags">'+(e.tags||[]).map(t=>'<span>'+esc(t)+'</span>').join("")+'</div>'+
+      '<div class="jp-tags"><span class="jp-tag lesson">Lesson '+esc(e.lesson||"—")+'</span>'+
+      (e.tags||[]).map(t=>'<span class="jp-tag">'+esc(t)+'</span>').join("")+
+      '</div>'+
       '<button class="jp-toggle" type="button">'+(state.hidden.has(e.id)?"Show answer":"Hide answer")+'</button>'+
     '</article>';
   }
@@ -124,32 +167,44 @@ permalink: /japanese/
     const rows=filtered();
     const root=document.getElementById("jp-content");
     document.getElementById("jp-stats").textContent=rows.length+" of "+state.data.entries.length+" notes · updated "+state.data.last_updated;
-    if(!rows.length){root.innerHTML='<div class="jp-empty">No matching notes.</div>';return}
+
+    if(!rows.length){
+      root.innerHTML='<div class="jp-empty">No matching notes.</div>';
+      return;
+    }
+
     const grouped={};
     rows.forEach(e=>(grouped[e.group]??=[]).push(e));
-    root.innerHTML=Object.entries(grouped).map(([g,es])=>
-      '<section class="jp-group"><div class="jp-group-title"><h2>'+esc(g)+'</h2><span>'+es.length+' notes</span></div>'+es.map(row).join("")+'</section>'
+    root.innerHTML=Object.entries(grouped).map(([group,entries])=>
+      '<section class="jp-section"><div class="jp-section-head"><h2>'+esc(group)+'</h2><span>'+entries.length+' notes</span></div>'+
+      entries.map(note).join("")+'</section>'
     ).join("");
+
     root.querySelectorAll(".jp-toggle").forEach(b=>b.addEventListener("click",()=>{
-      const id=b.closest(".jp-row").dataset.id;
+      const id=b.closest(".jp-note").dataset.id;
       state.hidden.has(id)?state.hidden.delete(id):state.hidden.add(id);
       render();
-      updateTagState();
+      updatePills();
     }));
   }
 
   document.getElementById("jp-search").addEventListener("input",render);
+  document.getElementById("jp-lesson").addEventListener("change",render);
   document.getElementById("jp-group").addEventListener("change",render);
-  document.getElementById("jp-tag").addEventListener("change",()=>{render();updateTagState()});
+  document.getElementById("jp-tag").addEventListener("change",()=>{render();updatePills()});
+
   document.getElementById("jp-random").addEventListener("click",()=>{
-    const rows=filtered(); if(!rows.length)return;
+    const rows=filtered();
+    if(!rows.length)return;
     const e=rows[Math.floor(Math.random()*rows.length)];
     state.hidden.add(e.id);
     render();
-    updateTagState();
+    updatePills();
     requestAnimationFrame(()=>document.querySelector('[data-id="'+CSS.escape(e.id)+'"]')?.scrollIntoView({behavior:"smooth",block:"center"}));
   });
 
-  init().catch(()=>{document.getElementById("jp-content").innerHTML='<div class="jp-empty">Could not load study data.</div>'});
+  init().catch(()=>{
+    document.getElementById("jp-content").innerHTML='<div class="jp-empty">Could not load study data.</div>';
+  });
 })();
 </script>
