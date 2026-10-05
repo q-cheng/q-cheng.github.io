@@ -219,6 +219,35 @@
       "corrected": "素材が揃った上で、料理を始めてください。",
       "natural": "素材を揃えた上で、料理を始めてください。",
       "explanation_zh": "「揃えった」是不正确的活用。如果主语是「素材が」，用自动词「揃う」→「揃った」。如果表达“把材料准备齐”，则用他动词「素材を揃えた上で」。"
+    },
+    {
+      "id": "20261005-owatte-hoshii",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "conjugation"
+      ],
+      "original": "今日はもう遅いから＿＿＿早く終わっ＿＿＿てほしい",
+      "corrected": "今日はもう遅いから、早く終わってほしい。",
+      "natural": "",
+      "explanation_zh": "这句基本正确。目标语法是「Vてほしい」，所以「終わる」变成「終わって」即可。"
+    },
+    {
+      "id": "20261005-yasashiku-shite-hoshii",
+      "date": "2026-10-05",
+      "lesson": "261006",
+      "group": "Homework corrections",
+      "tags": [
+        "grammar",
+        "conjugation",
+        "adjective"
+      ],
+      "original": "彼女には、もう少し＿＿やさし＿＿＿＿てほしい",
+      "corrected": "彼女には、もう少しやさしくしてほしい。",
+      "natural": "",
+      "explanation_zh": "「やさしい」是い形容词，表示“希望她更温柔一点”时要变成「やさしくしてほしい」：やさしい → やさしくする → やさしくしてほしい。"
     }
   ],
   "lessons": [
