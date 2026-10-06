@@ -117,22 +117,53 @@ permalink: /japanese/
 <script>
 (function(){
   const state={data:null,hidden:new Set()};
-  const PASSWORD_HASH="7f4ba5383793d3f7b4c0c11817cd6670c0ebf96f66448d3f6967a2085aee5e75";
   const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+  let encryptedPayload=null;
 
-  async function sha256(value){
-    const bytes=new TextEncoder().encode(value);
-    const digest=await crypto.subtle.digest("SHA-256",bytes);
-    return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
+  function b64ToBytes(value){
+    const raw=atob(value);
+    return Uint8Array.from(raw,c=>c.charCodeAt(0));
   }
 
-  async function unlock(password){
-    return (await sha256(password))===PASSWORD_HASH;
+  async function loadEncryptedPayload(){
+    if(encryptedPayload)return encryptedPayload;
+    const res=await fetch("{{ site.baseurl }}/japanese-learning.enc",{cache:"no-store"});
+    if(!res.ok)throw new Error("encrypted data unavailable");
+    encryptedPayload=await res.json();
+    return encryptedPayload;
   }
 
-  async function init(){
-    const res=await fetch("{{ site.baseurl }}/japanese-learning.json",{cache:"no-store"});
-    state.data=await res.json();
+  async function decryptStudyData(password){
+    const payload=await loadEncryptedPayload();
+    const passwordKey=await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(password),
+      "PBKDF2",
+      false,
+      ["deriveKey"]
+    );
+    const key=await crypto.subtle.deriveKey(
+      {
+        name:"PBKDF2",
+        salt:b64ToBytes(payload.kdf.salt),
+        iterations:Number(payload.kdf.iterations),
+        hash:payload.kdf.hash
+      },
+      passwordKey,
+      {name:"AES-GCM",length:Number(payload.cipher.key_bits)},
+      false,
+      ["decrypt"]
+    );
+    const plaintext=await crypto.subtle.decrypt(
+      {name:"AES-GCM",iv:b64ToBytes(payload.cipher.iv)},
+      key,
+      b64ToBytes(payload.ciphertext)
+    );
+    return JSON.parse(new TextDecoder().decode(plaintext));
+  }
+
+  async function init(data){
+    state.data=data;
 
     const lessons=[...new Set(state.data.entries.map(e=>e.lesson).filter(Boolean))].sort().reverse();
     const groups=[...new Set(state.data.entries.map(e=>e.group))].sort();
@@ -287,17 +318,14 @@ permalink: /japanese/
     const button=form.querySelector("button");
     button.disabled=true;
     try{
-      if(await unlock(input.value)){
-        input.value="";
-        login.hidden=true;
-        app.hidden=false;
-        await init();
-      }else{
-        error.textContent="Incorrect password.";
-        input.select();
-      }
+      const data=await decryptStudyData(input.value);
+      input.value="";
+      login.hidden=true;
+      app.hidden=false;
+      await init(data);
     }catch(err){
-      error.textContent="Could not unlock this page.";
+      error.textContent="Incorrect password.";
+      input.select();
     }finally{
       button.disabled=false;
     }
