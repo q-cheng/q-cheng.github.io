@@ -39,20 +39,23 @@ permalink: /japanese/
 .jp-section-head span{font-size:12px;color:#86868b}
 .jp-note{padding:22px 0;border-bottom:1px solid #e1e1e6}
 .jp-note-top{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start}
-.jp-original{font-size:19px;line-height:1.7;font-weight:600;letter-spacing:-.01em}
+.jp-original{font-size:19px;line-height:1.7;font-weight:600;letter-spacing:-.01em;white-space:pre-line}
+.jp-exercise-label{font-size:13px;font-weight:600;color:#515154;margin:0 0 10px}
+.jp-worksheet{font-size:13px;line-height:1.65;white-space:pre-line;color:#6e6e73;border-left:2px solid #d2d2d7;padding:3px 0 3px 12px;margin:0 0 14px}
+.jp-original-label{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#86868b;margin-bottom:3px}
 .jp-note-meta{font-size:12px;color:#86868b;white-space:nowrap;padding-top:4px}
 .jp-answer{margin-top:15px;padding:15px 17px;border-radius:14px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.03),0 6px 18px rgba(0,0,0,.035)}
 .jp-answer.hidden .jp-answer-inner{filter:blur(8px);user-select:none}
 .jp-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#86868b;margin:8px 0 4px}
 .jp-label:first-child{margin-top:0}
-.jp-corrected{font-size:17px;line-height:1.8}
+.jp-corrected{font-size:17px;line-height:1.8;white-space:pre-line}
 .jp-diff-equal{color:#1d1d1f}
 .jp-diff-add{background:#e8f7ee;color:#157347;border-radius:5px;padding:1px 2px}
 .jp-diff-remove{background:#fdecec;color:#b42318;border-radius:5px;padding:1px 2px;text-decoration:line-through;text-decoration-thickness:1.5px}
 .jp-diff-replace{background:#eaf2ff;color:#175cd3;border-radius:5px;padding:1px 2px}
 .jp-diff-old{color:#b42318;text-decoration:line-through;margin-right:3px;font-size:.88em}
 .jp-diff-arrow{color:#86868b;margin:0 2px;font-size:.82em}
-.jp-natural,.jp-why{font-size:15px;color:#515154;line-height:1.65}
+.jp-natural,.jp-why{font-size:15px;color:#515154;line-height:1.65;white-space:pre-line}
 .jp-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
 .jp-tag{display:inline-flex;align-items:center;border-radius:999px;background:#ececf1;color:#6e6e73;padding:5px 8px;font-size:11px;line-height:1}
 .jp-tag.lesson{background:#e8f1fb;color:#0066cc;font-weight:600}
@@ -190,7 +193,7 @@ permalink: /japanese/
       (!lesson||e.lesson===lesson)&&
       (!group||e.group===group)&&
       (!tag||(e.tags||[]).includes(tag))&&
-      (!q||[e.original,e.corrected,e.natural,e.explanation_zh,e.group,e.lesson,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q))
+      (!q||[e.exercise_label,e.worksheet,e.original,e.corrected,e.natural,e.explanation_zh,e.group,e.lesson,(e.tags||[]).join(" ")].join(" ").toLowerCase().includes(q))
     );
   }
 
@@ -256,8 +259,13 @@ permalink: /japanese/
         '<div class="jp-label">Why</div><div class="jp-why">'+esc(e.explanation_zh)+'</div>';
 
     return '<article class="jp-note" data-id="'+esc(e.id)+'">'+
+      (e.exercise_label?'<div class="jp-exercise-label">'+esc(e.exercise_label)+'</div>':"")+
+      (e.worksheet?'<div class="jp-worksheet"><div class="jp-original-label">Worksheet / 填空原题</div>'+esc(e.worksheet)+'</div>':"")+
       '<div class="jp-note-top">'+
-        '<div class="jp-original">'+esc(e.original)+'</div>'+
+        '<div>'+
+          (e.worksheet?'<div class="jp-original-label">Your completed answer</div>':"")+
+          '<div class="jp-original">'+esc(e.original)+'</div>'+
+        '</div>'+
         '<div class="jp-note-meta">'+esc(e.date)+'</div>'+
       '</div>'+
       '<div class="jp-answer '+(state.hidden.has(e.id)?"hidden":"")+'"><div class="jp-answer-inner">'+body+'</div></div>'+
